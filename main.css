@@ -153,7 +153,7 @@ header .container .icons a:hover svg {
   fill: #4c4c4c !important;
 }
 header .container .icons a:active svg {
-  fill: #3F51B5 !important;
+  fill: #8EBC8E !important;
 }
 header .container .icons .block {
   display: inline-block;
@@ -170,7 +170,7 @@ header {
 }
 
 .mobile_menu {
-  background: black;
+  background: #262626;
   width: 90%;
   height: 520px;
   top: 65px;
@@ -201,7 +201,7 @@ header {
 .mobile_menu nav ul .slide a:before {
   content: "";
   position: absolute;
-  background: #3F51B5;
+  background: #8EBC8E;
   width: 0%;
   height: 35px;
   animation: slide 0.8s ease;

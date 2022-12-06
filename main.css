@@ -105,12 +105,13 @@ header .container .head_nav {
 }
 header .container .head_nav ul {
   text-align: center;
+  line-height: 1.5em;
 }
 header .container .head_nav ul .visited a:after {
   content: "";
   position: absolute;
   width: 100%;
-  height: 4px;
+  height: 2px;
   background: black;
   margin: 15.5px 0;
   right: 0;
@@ -171,7 +172,7 @@ header {
 .mobile_menu {
   background: black;
   width: 90%;
-  height: 420px;
+  height: 520px;
   top: 65px;
   left: 0;
   margin: 10px 20px;

@@ -1,2 +1,2 @@
-# Responsive Website
-Just going to put some ideas down here
+#Basic Website
+Here are some basic ideas

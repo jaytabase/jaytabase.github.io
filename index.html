@@ -16,7 +16,8 @@
       /*sans-serif is a fallback font that is built into most browsers, in case google doesn't work*/
       * {font-family: 'Montserrat', sans-serif}
 
-      body {margin: 100px;} /*Put 100px of space around the body content*/
+      body {margin: 100px; max-width: 33%;} /*Put 100px of space around the body content. Limit width so it doesn't look stretched out*/
+      @media only screen and (max-width: 720px) {body {max-width: 80%;}} /*CSS media query changes how wide the page can be if view is smaller*/
       H1 {text-align: center;} /*Put the title in the middle*/
 
       /*Strech search bar to 100% of width. Add spacing around "Search...". And round off corners*/

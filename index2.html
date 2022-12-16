@@ -1,28 +1,141 @@
-<!doctype html>
-<html class="no-js" lang="">
-
+<!DOCTYPE html>
+<html class="no-js" lang="en" dir="ltr">
 <head>
+    
+  <title>Jaytabase | Lighning Search</title>
   <meta charset="utf-8">
-  <title></title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <meta property="og:title" content="">
-  <meta property="og:type" content="">
-  <meta property="og:url" content="">
-  <meta property="og:image" content="">
-
+  
+  <meta property="og:title" content="unset">
+  <meta property="og:type" content="unset">
+  <meta property="og:url" content="unset">
+  <meta property="og:image" content="unset">
+  
+  <link rel="icon" type="image/x-icon" href="./icon.png">
   <link rel="manifest" href="site.webmanifest">
-  <link rel="apple-touch-icon" href="icon.png">
-  <!-- Place favicon.ico in the root directory -->
-
-  <link rel="stylesheet" href="css/normalize.css">
+  
+    <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/main.css">
+  
+    <meta name="theme-color" content="#fafafa">
+  
+  <!-- Basic CSS/Styling to make it look better -->
+    <style>
+      /* Import Montserrat Font from Google Fonts (https://fonts.google.com/specimen/Montserrat)*/
+      @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
-  <meta name="theme-color" content="#fafafa">
+      /*The star means "Apply to everything" so we're applying the imported font to everything.*/
+      /*sans-serif is a fallback font that is built into most browsers, in case google doesn't work*/
+      * {font-family: 'Montserrat', sans-serif}
+
+      body {margin: 100px; max-width: 33%;} /*Put 100px of space around the body content. Limit width so it doesn't look stretched out*/
+      @media only screen and (max-width: 1080px) {body {max-width: 80%;}} /*CSS media query changes how wide the page can be if view is smaller*/
+      H1 {text-align: center;} /*Put the title in the middle*/
+
+      /*Strech search bar to 100% of width. Add spacing around "Search...". And round off corners*/
+      input {width: 100%; padding: 10px; border-radius: 25px;} 
+
+      /*Remove default bullet points from results. Remove spacing around it. Make line seperation greater*/
+      ul {list-style-type: none; padding: 0px; line-height: 1.5rem;}
+    </style>
+
+    
 </head>
 
+    
+    
 <body>
+    <!-- We only need 2 HTML elements for this to work! -->
+    <h1>⚡ Lightning Fast Live Search with Vanilla JS ⚡</h1> <!-- This isn't needed but adding a title is nice -->
+    <input id="search" autocomplete="off" placeholder="Search..."> <!-- Search Bar with id "search"  -->
+    <ul id="results"></ul> <!-- List of Results with id "results"  -->
+    <!-- That's it, the rest is javascript-->
+    
+    
+    
+<!--Javascript Time!-->
+<script>
+
+// First we need our data set. For this example we're storing it here vs loading it from an external resource.
+const data = [ // I've created a contsant variable called "data". Constant means the data it stores can't be changed.
+
+
+// This is our JSON array where you can set pairs of 'keys' like 'name:' & 'key values' like 'rating:"
+{ name: "Cheddar", rating: "9/10" },
+{ name: "Mozzarella", rating: "6/10" },
+{ name: "Parmesan", rating: "7/10" },
+{ name: "Roquefort", rating: "3/10" },
+{ name: "Brie", rating: "2/10" },
+{ name: "Gruyere", rating: "8/10" },
+{ name: "Feta", rating: "10/10" },
+{ name: "Manchego", rating: "4/10" },
+{ name: "Gorgonzola", rating: "5/10" },
+{ name: "Epoisses", rating: "7/10" },
+{ name: "Swiss", rating: "3/10" },
+{ name: "Gouda", rating: "8/10" },
+{ name: "Monterey Jack", rating: "2/10" },
+{ name: "Provolone", rating: "4/10" },
+{ name: "Blue cheese", rating: "3/10" },
+{ name: "Camembert", rating: "8/10" },
+{ name: "Irish Cheddar", rating: "1/10" },
+{ name: "Havarti", rating: "8/10" },
+{ name: "Colby-Jack", rating: "5/10" },
+{ name: "Stilton", rating: "4/10" },
+{ name: "Goat Cheese", rating: "3/10" } 
+//Last one doesn't need a comma at the end
+
+]; // Close the "data" variable that stores all the above
+
+
+
+
+//Now time to search through the data on search input!
+
+const search = document.getElementById("search"); // identify the search bar from the HTML above
+const results = document.getElementById("results"); // identify the results list from the HTML above
+
+let search_term = ""; // Empty variable called "search_term" that stores strings (aka plain text)
+
+const showList = () => { // Variable called "showList" that can be called to invoke the following code
+  results.innerHTML = ""; //empty variable that stores data directly into the HTML when data is passed from the Node WebAPI
+  
+  data.filter((item) => { // Using a filter method to create new array for elements that pass the conditions from "search_term"
+      return (
+
+// using toLowerCase because capital letters rank differently and users will be searching in lower case expecting upper case results.
+        item.name.toLowerCase().includes(search_term) || //Including key "name" in the filter method and storing it in search_term
+        item.rating.toLowerCase().includes(search_term) //Including key "rating" in the filter method and storing it in search_term
+      );
+    })
+    
+    .forEach((e) => { // Using a forEach method to call a function for every element in an array.
+      const li = document.createElement("li"); // Create a new list item "li" under the "ul" list in the HTML
+      li.innerHTML = `${e.name}  - <b>${e.rating}</b>`; // store keys & values in the list (name & rating)
+      results.appendChild(li); //Using appendChild from the Node WebAPI to pass data to "results"
+    });
+};
+
+showList(); // Invoke/Call the showList function above
+
+search.addEventListener("input", (event) => { // An event listener watches the search bar for changes in text
+  search_term = event.target.value.toLowerCase(); // If triggered, it will pass the value back to "search_term"
+  showList(); // Invokes/calls the showList function again to produce new results.
+});
+
+</script>
+
+
+<!-- 
+What is the arrow function "()=>" used above
+https://dmitripavlutin.com/differences-between-arrow-and-regular-functions/ 
+
+Javascript forEach method for arrays
+https://www.w3schools.com/jsref/jsref_foreach.asp
+
+Javascript filter() array method
+https://www.w3schools.com/jsref/jsref_filter.asp
+-->
 
   <!-- Add your site or application content here -->
   <p>Hello world! This is HTML5 Boilerplate.</p>
@@ -30,12 +143,13 @@
   <script src="js/plugins.js"></script>
   <script src="js/main.js"></script>
 
-  <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+  <!-- Google Analytics: Disabled for now. -->
   <script>
     window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
     ga('create', 'UA-XXXXX-Y', 'auto'); ga('set', 'anonymizeIp', true); ga('set', 'transport', 'beacon'); ga('send', 'pageview')
   </script>
   <script src="https://www.google-analytics.com/analytics.js" async></script>
+    
 </body>
 
 </html>

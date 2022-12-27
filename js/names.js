@@ -1,3 +1,5 @@
+// Names obtained from https://www.usna.edu/Users/cs/roche/courses/s15si335/proj1/files.php%3Ff=names.txt&downloadcode=yes
+
 const data = [
 { name: "Michael", rating: "7 Characters" },
 { name: "Christopher", rating: "11 Characters" },
